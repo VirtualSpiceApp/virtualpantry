@@ -26,13 +26,11 @@ export default function FoodTypeCardContainer() {
         {_.isEmpty(types) ?
         <p>There is no food types</p>
         :
-        types.map((row) => {
-            return(
-                <div>
-                    <FoodTypeCard name={row.name} piece={row.piece}/>
-                </div>
-            )
-        })
+        Object.entries(types).map((key) => (
+            <div>
+                <FoodTypeCard name={key[0]} piece={key[1]}/>
+            </div>
+        ))
         }
    </div>
   );
