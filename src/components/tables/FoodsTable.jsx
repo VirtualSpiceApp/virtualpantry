@@ -69,7 +69,11 @@ export default function FoodsTable(props) {
               <TableCell align="right">{key.type}</TableCell>
               <TableCell align="right">{key.exp_date["$date"]}</TableCell>
               <TableCell align="right">{key.location}</TableCell>
-              <TableCell align="right">{key.date_of_shopping["$date"]}</TableCell>
+              <TableCell align="right">
+                {
+                  new Date(key.date_of_shopping["$date"]).toDateString()
+                }
+              </TableCell>
               <TableCell align="right">{addMoveToShoppingListButton(key._id['$oid'])}</TableCell>
               <TableCell align="right">{addDeleteButton(key._id['$oid'])}</TableCell>
             </TableRow>

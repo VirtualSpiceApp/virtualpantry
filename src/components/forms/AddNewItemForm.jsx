@@ -48,6 +48,9 @@ export default function AddNewItemForm() {
     setFoodTypes(event.target.value);
   };
 
+
+
+
   return (
     <div className={classes.root}>
         <Card className={classes.root} variant="outlined">
@@ -93,7 +96,7 @@ export default function AddNewItemForm() {
                 </form>
             </CardContent>
       <CardActions>
-        <Button color="primary" variant="contained" size="small"> Save details</Button>
+        <Button color="primary" variant="contained" size="small"> Add new item </Button>
       </CardActions>
     </Card>
     </div>
