@@ -1,9 +1,29 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import ShoppingListTable from '../components/tables/ShoppingListTable';
 
 function ShoppingList() {
+
+  const [shoppingList, setShoppingList] = useState([]);
+
+  useEffect(() => {
+    fetchShoppingListFromAPI()
+  }, [])
+
+  function fetchShoppingListFromAPI(){
+    fetch('/api/shoppinglist')
+    .then(response => response.json())
+    .then(data => {
+      setShoppingList(data);
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+
+
   return (
     <div>
-      Shopping List page
+      <ShoppingListTable shoppingList={shoppingList}/>
     </div>
   );
 }
