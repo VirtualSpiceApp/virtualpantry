@@ -40,14 +40,6 @@ jobs:
         name: virtualpantry_frontend
         path: ./build
         
-    - uses: stefanoeb/eslint-action@1.0.2
-      with:
-        files: src/
-      
-    - uses: stefanoeb/eslint-action@1.0.2
-      with:
-        files: ./src/
-        
-    - uses: stefanoeb/eslint-action@1.0.2
-      with:
-        files: ./src
+    - name: 'Install and run ESLint'
+    - run: npm i -g eslint
+    - run: eslint --ext .jsx,.js src/
