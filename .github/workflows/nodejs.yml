@@ -40,6 +40,5 @@ jobs:
         name: virtualpantry_frontend
         path: ./build
         
-    - name: 'Install and run ESLint'
     - run: npm i -g eslint
     - run: eslint --ext .jsx,.js src/
