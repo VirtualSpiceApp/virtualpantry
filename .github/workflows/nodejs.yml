@@ -43,9 +43,6 @@ jobs:
     - uses: stefanoeb/eslint-action@1.0.2
       with:
         files: src/
-        
-    - name: GitHub Action for ESLint
-      uses: 123FLO321/action-eslint-standalone@1.0.0
       
     - uses: stefanoeb/eslint-action@1.0.2
       with:
