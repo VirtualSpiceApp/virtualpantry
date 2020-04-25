@@ -5,10 +5,16 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
+      - develop
+      - "feature/*"
+      - "bugfix/"
+      - "hotfix/"
   pull_request:
-    branches: [ master ]
-
+    branches:
+      - master
+      - develop
 jobs:
   build:
 
@@ -33,3 +39,6 @@ jobs:
       with:
         name: virtualpantry_frontend
         path: ./build
+        
+    - run: npm i -g eslint
+    - run: eslint --ext .jsx,.js src/
