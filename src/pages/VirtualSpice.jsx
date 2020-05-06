@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close'
 import AddNewItemForm from '../components/forms/AddNewItemForm';
-import host from '../host';
+import { host } from '../host';
 
 const useStyles = makeStyles(theme => ({
   root: {

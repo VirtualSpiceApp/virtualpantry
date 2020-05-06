@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import ShoppingListTable from '../components/tables/ShoppingListTable';
-import host from '../host';
+import { host } from '../host';
 
 function ShoppingList() {
 
