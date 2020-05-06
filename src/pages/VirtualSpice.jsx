@@ -41,7 +41,7 @@ export default function VirtualSpice() {
   }, [])
 
   function fetchFoodsFromAPI(){
-    fetch('/api/virtualspice')
+    fetch('https://virtualspice-server.herokuapp.com/api/virtualspice')
     .then(response => response.json())
     .then(data => {
       setPantry(data);
