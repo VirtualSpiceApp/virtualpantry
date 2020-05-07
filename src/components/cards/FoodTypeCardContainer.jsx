@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import FoodTypeCard from './FoodTypeCard';
 import _ from 'lodash';
+import { host } from '../../host';
 
 export default function FoodTypeCardContainer() {
     const [types, setTypes] = useState([])
@@ -10,7 +11,7 @@ export default function FoodTypeCardContainer() {
       }, [])
 
     function fetchTypesFromAPI(){
-        fetch('/api/getcountoftypes')
+        fetch(`${host}/api/getcountoftypes`)
         .then(response => response.json())
         .then(data => {
             setTypes(data);

@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close'
 import AddNewItemForm from '../components/forms/AddNewItemForm';
+import { host } from '../host';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -41,7 +42,7 @@ export default function VirtualSpice() {
   }, [])
 
   function fetchFoodsFromAPI(){
-    fetch('/api/virtualspice')
+    fetch(`${host}/api/virtualspice`)
     .then(response => response.json())
     .then(data => {
       setPantry(data);
@@ -52,7 +53,7 @@ export default function VirtualSpice() {
   }
 
   function deleteItemWithId(itemId){
-    fetch(`/api/virtualspice/delete/${itemId}`)
+    fetch(`${host}/api/virtualspice/delete/${itemId}`)
     .then(response => response.json())
     .then(data => {
       console.log(data)
