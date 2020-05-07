@@ -21,10 +21,26 @@ function ShoppingList() {
     })
   }
 
+  function deleteItemWithId(itemId){
+    fetch(`${host}/api/shoppinglist/delete/${itemId}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+    }).then(data =>{
+      setOpen(true)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+
 
   return (
     <div>
-      <ShoppingListTable shoppingList={shoppingList}/>
+      <ShoppingListTable
+          shoppingList={shoppingList}
+          deleteItemWithId={deleteItemWithId}
+      />
     </div>
   );
 }
