@@ -8,7 +8,7 @@ function ShoppingList() {
 
   useEffect(() => {
     fetchShoppingListFromAPI()
-  }, [])
+  }, null)
 
   function fetchShoppingListFromAPI(){
     fetch(`${host}/api/shoppinglist`)
@@ -26,10 +26,7 @@ function ShoppingList() {
     .then(response => response.json())
     .then(data => {
       console.log(data)
-    }).then(data =>{
-      setOpen(true)
-    })
-    .catch(error => {
+    }).catch(error => {
       console.log(error)
     })
   }
