@@ -12,7 +12,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-
+import { host } from '../../host';
 
 const useStyles = makeStyles({
   table: {
@@ -68,7 +68,7 @@ export default function FoodsTable(props) {
       type: type,
       location: location
     }));
-    fetch('/api/addItemToShoppingList', {
+    fetch(`${host}/api/addItemToShoppingList`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -80,7 +80,6 @@ export default function FoodsTable(props) {
       }),
     }).then((response) => {
       if(response.status === 201){
-        console.log("dsadsadasdas")
         setOpen(true);
       }
     });
