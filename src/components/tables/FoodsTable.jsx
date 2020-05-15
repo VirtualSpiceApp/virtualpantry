@@ -23,7 +23,6 @@ const useStyles = makeStyles({
   }
 });
 
-
 export default function FoodsTable(props) {
   const classes = useStyles();
   const pantry = props.pantry;
@@ -113,7 +112,7 @@ export default function FoodsTable(props) {
   return (
     <div>
       <TableContainer component={Paper}>
-        <Table className={classes.table} size="small" aria-label="a dense table">
+        <Table className={classes.table} size="small" aria-label="a dense table" >
           <TableHead>
             <TableRow>
               <TableCell align="center"><strong>Name</strong></TableCell>
@@ -132,7 +131,11 @@ export default function FoodsTable(props) {
                 {key.name}
                 </TableCell>
                 <TableCell align="right">{key.type}</TableCell>
-                <TableCell align="right">{key.exp_date["$date"]}</TableCell>
+                <TableCell align="right" bgcolor={new Date(key.exp_date["$date"])>new Date()? "": "red"}>
+                  {
+                    new Date(key.exp_date["$date"]).toDateString()  
+                  }
+                  </TableCell>
                 <TableCell align="right">{key.location}</TableCell>
                 <TableCell align="right">
                   {
