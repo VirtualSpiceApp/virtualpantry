@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import ShoppingListTable from '../components/tables/ShoppingListTable';
 import { host } from '../host';
+import EmailSendingForm from '../components/forms/EmailSendingForm';
 
 function ShoppingList() {
 
@@ -34,6 +35,7 @@ function ShoppingList() {
 
   return (
     <div>
+      <EmailSendingForm />
       <ShoppingListTable
           shoppingList={shoppingList}
           deleteItemWithId={deleteItemWithId}
