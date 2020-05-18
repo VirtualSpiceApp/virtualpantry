@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -8,6 +8,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import { host }from '../../host';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -42,14 +44,77 @@ const types = [
 
 export default function AddNewItemForm() {
   const classes = useStyles();
-  const [foodTypes, setFoodTypes] = React.useState('sustainable food');
+  
+  const [foodTypes, setFoodTypes] = React.useState(types[0].value);
+  const [name, setName] = useState(null);
+  const [location, setLocation] = useState(null);
+  const [date, setDate] = useState(new Date());
 
-  const handleChange = (event) => {
+  const handleChangeType = (event) => {
     setFoodTypes(event.target.value);
   };
 
+  function checkIfTextFieldFilled(){
+    return foodTypes !== null && name !== null && location !== null && date !== null && new Date(date).getTime() >= new Date().getTime();
+  }
 
+  function sendFoodToServer(){
+    fetch(`${host}/api/addItemToVirtualSpice`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: name,
+          exp_date: date,
+          type: foodTypes,
+          location: location
+        }),
+      }).then((response) => {
+        if(response.status === 201){
+          console.log("email sent");
+        }
+      });
+  }
 
+  function handleChange(event) {
+    const id = event['target']['id'];
+    switch(id){
+      case 'name': 
+        handleChangeName(event);
+        break;
+      case 'location':
+        handleChangeLocation(event);
+        break;
+      case 'date':
+        handleChangeDate(event);
+        break;
+    }
+  }
+
+  function handleChangeName(event) {
+      if(event.target.value == ""){
+          setName(null);
+      }else{
+        setName(event.target.value);
+      }
+  }
+
+  function handleChangeLocation(event) {
+    if(event.target.value == ""){
+        setLocation(null);
+    }else{
+      setLocation(event.target.value);
+      }
+    }
+
+  function handleChangeDate(event) {
+    if(event.target.value == ""){
+      setDate(new Date());
+    }else{
+      setDate(event.target.value);
+      }
+    }
 
   return (
     <div className={classes.root}>
@@ -61,15 +126,21 @@ export default function AddNewItemForm() {
                 <form className={classes.form} noValidate autoComplete="off">
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6} >
-                            <TextField id="name" fullWidth required label="Name of the item" variant="outlined" />
+                            <TextField
+                              id="name"
+                              fullWidth
+                              required
+                              label="Name of the item"
+                              variant="outlined"
+                              onChange={handleChange} />
                         </Grid>
                         <Grid item xs={12} sm={6} >
-                            <TextField
+                              <TextField
                                 id="outlined-select-currency"
                                 select
                                 label="Select"
                                 value={foodTypes}
-                                onChange={handleChange}
+                                onChange={handleChangeType}
                                 helperText="Select the food type"
                                 variant="outlined"
                                 >
@@ -81,22 +152,38 @@ export default function AddNewItemForm() {
                             </TextField>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField id="location" value="Unknown" fullWidth required label="Location" variant="outlined" />
+                            <TextField
+                              id="location" 
+                              fullWidth
+                              required
+                              label="Location"
+                              variant="outlined"
+                              onChange={handleChange} />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField type="date" 
                                 id="date" 
                                 fullWidth 
                                 required 
+                                defaultValue="2017-05-24"
                                 helperText="Date of expiration"  
                                 variant="outlined"
+                                onChange={handleChange}
                                 />
                         </Grid>
                     </Grid>
                 </form>
             </CardContent>
       <CardActions>
-        <Button color="primary" variant="contained" size="small"> Add new item </Button>
+        <Button
+          color="primary"
+          variant="contained"
+          size="small"
+          disabled={!checkIfTextFieldFilled()}
+          onClick={sendFoodToServer}
+          >
+            Add new item
+          </Button>
       </CardActions>
     </Card>
     </div>
