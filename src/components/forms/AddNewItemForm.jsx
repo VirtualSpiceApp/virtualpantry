@@ -66,7 +66,7 @@ export default function AddNewItemForm() {
         },
         body: JSON.stringify({
           name: name,
-          exp_date: date,
+          exp_date: JSON.stringify(date),
           type: foodTypes,
           location: location
         }),
