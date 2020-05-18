@@ -34,7 +34,7 @@ export default function EmailSendingForm() {
     }
 
     function sendEmailAddressToServer(){
-        fetch(`${host}/api/email`, {
+        fetch(`${host}/email`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
